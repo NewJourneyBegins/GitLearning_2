@@ -1,0 +1,57 @@
+package restassuredtestcases;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+public class GetRequest {
+
+	@Test
+	void testGetUsersList() {
+		System.out.println("======TEST 1========");
+
+		Response rsp =  RestAssured.get("https://reqres.in/api/users?page=2");	
+		//Validating status code
+		System.out.println(rsp.getStatusCode());
+		Assert.assertEquals(rsp.getStatusCode(), 200);
+
+		//Validating response body
+		System.out.println(rsp.getBody().asString());
+		System.out.println("The response body : \n"+rsp.body().asString());
+
+		//response time (how much time it took)
+		System.out.println("The response time : " + rsp.getTime());
+
+		//get header
+		System.out.println("Content type header : " + rsp.header("content-type"));
+		System.out.println("Response Headers are :" + rsp.headers());
+
+	}
+	
+	@Test
+	void testGetUserDetails() {
+		
+		System.out.println("======TEST 2========");
+		
+		String userid = "2";
+		Response rsp =  RestAssured.get("https://reqres.in/api/users/" + userid);	
+		//Validating status code
+		System.out.println(rsp.getStatusCode());
+		Assert.assertEquals(rsp.getStatusCode(), 200);
+
+		//Validating response body
+		System.out.println(rsp.getBody().asString());
+		System.out.println("The response body : \n"+rsp.body().asString());
+
+		//response time (how much time it took)
+		System.out.println("The response time : " + rsp.getTime());
+
+		//get header
+		System.out.println("Content type header : " + rsp.header("content-type"));
+		System.out.println("Response Headers are :" + rsp.headers());
+
+	}
+	
+} 
